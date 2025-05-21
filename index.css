@@ -1,5 +1,136 @@
+:root {
+    --light-grey: #dddddd;
+    --medium-grey: #aaaaaa;
+}
+
+body {
+    display: block;
+}
+
+h1 {
+    color: var(--light-grey);
+    font-family: "Turret Road", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    letter-spacing: 4px;
+    font-size: 4rem;
+    margin: 0;
+}
+
+h2 {
+    color: var(--medium-grey);
+    font-family: "Turret Road", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    letter-spacing: 4px;
+    font-size: 2rem;
+    margin: 0;
+}
+
 .space {
-    height: 200vh;
+    display: flex;
+    height: 1000vh;
     width: 100%;
     background-color: black;
 }
+
+.space-title {
+    position: fixed;
+    margin-top: 0;
+    transform: translateX(-25vw);
+    cursor: default;
+    z-index: 100;
+}
+
+.meteor {
+    position: fixed;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
+
+.planet {
+    position: fixed;
+    width: 300px;
+    height: 300px;
+}
+
+.white-card-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 110vh;
+    width: 100%;
+    left: 0;
+    overflow: hidden; /* this is what clips the rotated content */
+}
+
+.white-card-container {
+    display: flex;
+    height: 150vh;
+    width: 100vw;
+    flex-direction: column;
+    transform: skewY(-10deg);
+    transform-origin: center, center;
+    will-change: transform;
+}
+
+.white-card {
+    min-height: 100vh;
+    width: 100%;
+    background-color: white;
+    opacity: 75%;
+}
+
+/* --------- Banderoller Start --------- */  
+.white-card-banderoller {
+    height: 100px;
+    width: 100%;
+    background-color: var(--light-grey);
+    overflow: hidden;
+    position: relative;
+}
+
+.marquee {
+    width: 100%;
+    display: inline-block;
+    white-space: nowrap;
+    position: absolute;
+    will-change: transform;
+    overflow: hidden;
+}
+
+.marquee span {
+    display: inline-block;
+    font-size: 2rem;
+    color: var(--medium-grey);
+    font-family: "Turret Road", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    letter-spacing: 4px;
+    margin-top: 10px;
+    padding-left: 100%;
+    animation: marquee  8s linear infinite;
+}
+
+.marquee2 span {
+    animation-delay: 4s;
+}
+
+@keyframes marquee {
+    0% {
+        transform: translate(0, 0);
+    }
+    100% {
+        transform: translate(-100%, 0);
+    }
+}
+/* --------- Banderoller End --------- */  
+
+.transition-gradient {
+    height: 500px;
+    width: 100%;
+    background: linear-gradient(to bottom, black, white 100%);
+}
+
