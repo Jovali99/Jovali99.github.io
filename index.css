@@ -1,6 +1,8 @@
 :root {
     --light-grey: #dddddd;
     --medium-grey: #aaaaaa;
+    --cube-side-length: 30vh;
+    --cube-z-offset: calc(var(--cube-side-length)/2);
 }
 
 body {
@@ -53,23 +55,33 @@ h2 {
     position: fixed;
     width: 300px;
     height: 300px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: planetSpin 15s infinite linear;
+}
+
+@keyframes planetSpin {
+    0%   { transform: translate(-50%, -50%) rotate(0deg) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg) rotate(360deg); }
 }
 
 .white-card-wrapper {
+    z-index: 3;
     display: flex;
     justify-content: center;
     align-items: center;
     position: absolute;
-    top: 110vh;
+    top: 90vh;
     width: 100%;
     left: 0;
-    overflow: hidden; /* this is what clips the rotated content */
+    overflow: hidden;
 }
 
 .white-card-container {
     display: flex;
-    height: 150vh;
-    width: 100vw;
+    height: auto;
+    width: 110vw;
     flex-direction: column;
     transform: skewY(-10deg);
     transform-origin: center, center;
@@ -77,7 +89,7 @@ h2 {
 }
 
 .white-card {
-    min-height: 100vh;
+    height: 200vh;
     width: 100%;
     background-color: white;
     opacity: 75%;
@@ -133,4 +145,52 @@ h2 {
     width: 100%;
     background: linear-gradient(to bottom, black, white 100%);
 }
+
+
+/* --------- Cube Start --------- */  
+.cube-scene {
+    width: var(--cube-side-length);
+    height: var(--cube-side-length);
+    perspective: 800px;
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+
+.cube {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transform: rotateX(-45deg) rotateY(45deg);
+    will-change: transform;
+    transition: transform 0.2s ease-out;
+}
+
+.face {
+    position: absolute;
+    width: var(--cube-side-length);
+    height: var(--cube-side-length);
+    background: rgba(0, 128, 255, 0.8);
+    border: 2px solid #fff;
+    font-size: 24px;
+    text-align: center;
+    line-height: 200px;
+    cursor: pointer;
+}
+
+.cube-img {
+    width: 100%;
+    height: 100%;
+}
+
+.front  { transform: rotateY(  0deg) translateZ(var(--cube-z-offset)); }
+.back   { transform: rotateY(180deg) translateZ(var(--cube-z-offset)); }
+.right  { transform: rotateY( 90deg) translateZ(var(--cube-z-offset)); }
+.left   { transform: rotateY(-90deg) translateZ(var(--cube-z-offset)); }
+.top    { transform: rotateX( 90deg) translateZ(var(--cube-z-offset)); }
+.bottom { transform: rotateX(-90deg) translateZ(var(--cube-z-offset)); }
+/* --------- Cube End --------- */  
 
