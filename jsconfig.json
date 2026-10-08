@@ -1,6 +1,8 @@
 {
 	"compilerOptions": {
 		"checkJs": true,
-		"lib": ["ES2022", "DOM"]
+		"lib": ["ES2022", "DOM"],
+		"noImplicitAny": false
+
 	}
 }

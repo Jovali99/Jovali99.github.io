@@ -2,55 +2,69 @@ let isMouseDown = false;
 let startX, startY;
 
 window.addEventListener("mousedown", (e) => {
-  if (!e.target.classList.contains("face")) return;
+	if (!e.target.classList.contains("face_container")) return;
 
-  isMouseDown = true;
-  startX = e.clientX;
-  startY = e.clientY;
+	isMouseDown = true;
+	startX = e.clientX;
+	startY = e.clientY;
 });
 
 window.addEventListener("mouseup", () => {
-  isMouseDown = false;
+	isMouseDown = false;
 });
 
 window.addEventListener("mousemove", (e) => {
-  if (!isMouseDown) return;
+	if (!isMouseDown) return;
 
-  const deltaX = e.clientX - startX;
-  const deltaY = e.clientY - startY;
+	const deltaX = e.clientX - startX;
+	const deltaY = e.clientY - startY;
 
-  cubeState.targetY += deltaX * 0.3; // rotateY
-  cubeState.targetX -= deltaY * 0.3; // rotateX
+	cubeState.targetY += deltaX * 0.3; // rotateY
+	cubeState.targetX -= deltaY * 0.3; // rotateX
 
-  startX = e.clientX;
-  startY = e.clientY;
+	startX = e.clientX;
+	startY = e.clientY;
 });
 
 const cubeState = {
-  rotationX: 0, // actual applied rotation X
-  rotationY: 0, // actual applied rotation Y
-  targetX: 0, // updated on drag
-  targetY: 0, // updated on drag
-  autoRotateY: 0, // accumulates idle rotation
-  rotationAmount: 0.2, // how fast auto rotation happens
+	rotationX: 0, // actual applied rotation X
+	rotationY: 0, // actual applied rotation Y
+	targetX: 0, // updated on drag
+	targetY: 0, // updated on drag
+	autoRotateY: 0, // accumulates idle rotation
+	rotationAmount: 0.2, // how fast auto rotation happens
 };
 
 function animateCube() {
-  if (!isMouseDown) {
-    cubeState.autoRotateY += cubeState.rotationAmount;
-  }
+	if (!isMouseDown) {
+		cubeState.autoRotateY += cubeState.rotationAmount;
+	}
 
-  // Smooth transition to drag targets
-  cubeState.rotationX += (cubeState.targetX - cubeState.rotationX) * 0.15;
-  cubeState.rotationY += (cubeState.targetY - cubeState.rotationY) * 0.15;
+	// Smooth transition to drag targets
+	cubeState.rotationX += (cubeState.targetX - cubeState.rotationX) * 0.15;
+	cubeState.rotationY += (cubeState.targetY - cubeState.rotationY) * 0.15;
 
-  const totalRotateX = cubeState.rotationX;
-  const totalRotateY = cubeState.rotationY + cubeState.autoRotateY;
+	const totalRotateX = cubeState.rotationX;
+	const totalRotateY = cubeState.rotationY + cubeState.autoRotateY;
 
-  if (cube == null) return;
-  cube.style.transform = `rotateX(${totalRotateX}deg) rotateY(${totalRotateY}deg)`;
+	if (cube == null) return;
+	cube.style.transform = `rotateX(${totalRotateX}deg) rotateY(${totalRotateY}deg)`;
 }
 
-function cubeButtonClicked(face) {
-  console.log("Cube button: ", face, " clicked");
+function cubeButtonClicked(project_id) {
+    const space = document.getElementById("space");
+
+    loadProjectPanel(project_id);
+	console.log("Cube button: ", project_id, " clicked");
+}
+
+async function loadProjectPanel(id) {
+	const element = document.getElementById("project_panel");
+    if(element == null) return;
+	const response = await fetch("components/project_panel/project_panel.html");
+	if (!response.ok) {
+		throw new Error(`Failed to load project: ${id}`);
+	}
+	element.innerHTML = await response.text();
+    initPP();
 }

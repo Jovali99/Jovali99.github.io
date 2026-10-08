@@ -1,64 +1,73 @@
 :root {
-  --light-grey: #dddddd;
-  --medium-grey: #aaaaaa;
-  --cube-side-length: 35vh;
-  --cube-z-offset: calc(var(--cube-side-length)/2);
+	--light-grey: #dddddd;
+	--medium-grey: #aaaaaa;
+	--cube-side-length: 35vh;
+	--cube-z-offset: calc(var(--cube-side-length)/2);
 }
 
 body {
-  display: block;
+	display: block;
 }
 
 p {
-  color: var(--light-grey);
-  font-family: "Turret Road", sans-serif;
+	color: var(--light-grey);
+	font-family: "Turret Road", sans-serif;
 }
 
 h1 {
-  color: var(--light-grey);
-  font-family: "Turret Road", sans-serif;
-  font-weight: 700;
-  font-style: normal;
-  letter-spacing: 4px;
-  font-size: 4rem;
-  margin: 0;
+	color: var(--light-grey);
+	font-family: "Turret Road", sans-serif;
+	font-weight: 700;
+	font-style: normal;
+	letter-spacing: 4px;
+	font-size: 4rem;
+	margin: 0;
 }
 
 h2 {
-  color: var(--medium-grey);
-  font-family: "Turret Road", sans-serif;
-  font-weight: 700;
-  font-style: normal;
-  letter-spacing: 4px;
-  font-size: 2rem;
-  margin: 0;
+	color: var(--medium-grey);
+	font-family: "Turret Road", sans-serif;
+	font-weight: 700;
+	font-style: normal;
+	letter-spacing: 4px;
+	font-size: 2rem;
+	margin: 0;
 }
 
 .space {
-  display: block;
-  position: relative;
-  /*height: 200vh;*/
-  width: 100%;
-  background-color: black;
-  background-image: url("assets/night_sky_1.jpg");
-  background-size: 100% auto;
-  background-position: center top;
-  background-repeat: repeat-y;
+	display: block;
+	position: relative;
+	/*height: 200vh;*/
+	width: 100%;
+	background-color: black;
+	background-image: url("assets/night_sky_1.jpg");
+	background-size: 100% auto;
+	background-position: center top;
+	background-repeat: repeat-y;
 }
 
 #information_panel {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  position: relative;
-  z-index: 10;
-  /*background-color: rgba(100, 100, 100, 0.2);*/
-  height: 180vh;
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	position: relative;
+	z-index: 10;
+	/*background-color: rgba(100, 100, 100, 0.2);*/
+	height: 180vh;
 }
 
 #cube_scene {
-  top: 180vh;
-  height: 40vh;
-  width: 100%;
-  /*background-color: rgba(100, 200, 100, 0.4);*/
+	position: absolute;
+	top: 50vh;
+	height: 40vh;
+	width: 100%;
+	/*background-color: rgba(100, 200, 100, 0.4);*/
+}
+
+#project_panel {
+	position: fixed;
+	top: 50vh;
+    left: 50%;
+    translate: -50% -50%;
+    z-index: 20;
 }

@@ -45,11 +45,16 @@ document.addEventListener("DOMContentLoaded", async () => {
 	startAnimating(60);
 
 	await loadComponent("stars_background", "components/stars/stars.html");
-	initStars(2);
+	initStars(4);
+
+	await loadProjects();
 
 	await loadComponent("information_panel", "components/information_panel/information_panel.html");
 	informationInit();
 
 	await loadComponent("cube_scene", "components/cube/cube.html");
 	cube = document.querySelector(".cube");
+
+	//await loadComponent("project_panel", "components/project_panel/project_panel.html");
+	//initPP();
 });

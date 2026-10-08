@@ -1,0 +1,10 @@
+{
+    "title": "My Game",
+    "stack": ["C#", "Godot"],
+    "description": "A small FPS project.",
+	    "images": [
+        "image1.jpg",
+        "image2.jpg",
+        "image3.jpg"
+    ]
+}
