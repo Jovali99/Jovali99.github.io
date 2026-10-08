@@ -1,0 +1,115 @@
+:root {
+  --info-animation-duration: 2s;
+  --info-animation-delay: 0.5s;
+}
+
+.info_background_container {
+  display: block;
+  position: sticky;
+  top: 5%;
+  width: 800px;
+  height: 800px;
+  /*background-color: rgba(212, 180, 131, 0.1);*/
+  overflow: hidden;
+}
+
+.info_title_container {
+  display: flex;
+  width: 100%;
+  height: 70px;
+  align-items: center;
+  justify-content: center;
+  /*background-color: rgba(14, 19, 31, 0.1);*/
+}
+
+.info_title_text {
+  margin: 0;
+  text-align: center;
+  font-size: 2rem;
+}
+
+.info_layer_container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.info_text_layer1,
+.info_text_layer2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  display: flex;
+  flex-wrap: wrap;
+
+  font-size: 1.2rem;
+
+  mask-image: linear-gradient(
+    -3deg,
+    transparent 0%,
+    transparent 25%,
+    black 30%,
+    black 70%,
+    transparent 75%,
+    transparent 100%
+  );
+
+  mask-size: 400% 400%;
+  mask-position: 50% 50%;
+  mask-repeat: no-repeat;
+
+  /*background-color: rgba(116, 189, 194, 0.2); */
+}
+.info_text_layer1,
+.info_text_layer2 {
+  mask-position: 100% 100%;
+}
+
+.itl_fade_out {
+  animation: fadeOut var(--info-animation-duration) linear forwards;
+}
+
+.itl_fade_in {
+  animation: fadeIn var(--info-animation-duration) linear
+    var(--info-animation-delay) forwards;
+}
+
+.itl_hidden {
+  mask-position: 0% 0%;
+}
+
+.itl_visible {
+  mask-position: 50% 50%;
+}
+
+@keyframes fadeOut {
+  from {
+    mask-position: 50% 50%;
+  }
+
+  to {
+    mask-position: 0% 0%;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    mask-position: 100% 100%;
+  }
+
+  to {
+    mask-position: 50% 50%;
+  }
+}
+
+.info_text_container_m {
+  width: 60%;
+}
+
+.info_text_container_s {
+  width: 40%;
+}
+
+.info_text_container_l {
+  width: 100%;
+}
