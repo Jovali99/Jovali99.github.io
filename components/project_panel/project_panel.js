@@ -1,39 +1,59 @@
 let currentSlide = 0;
 let track;
-let projects = [];
-
-class Project {
-	constructor(id, title, stack, desc, imgUrls) {
-		this.id = id;
-		this.title = title;
-		this.stack = stack;
-		this.description = desc;
-		this.imageUrls = imgUrls;
-	}
-}
 
 function updateCarousel() {
 	track.style.transform = `translateX(-${currentSlide * 100}%)`;
 }
 
-function initPP() {
-	track = document.querySelector(".carousel_track");
-	const slides = document.querySelectorAll(".carousel_track li");
+function initPP(id) {
+	const slides = initProject(id);
 
 	const previousButton = document.querySelector(".carousel_previous");
 	const nextButton = document.querySelector(".carousel_next");
 
-	nextButton.addEventListener("click", () => {
+	nextButton?.addEventListener("click", () => {
 		currentSlide++;
 		if (currentSlide >= slides.length) currentSlide = 0;
 		updateCarousel();
 	});
 
-	previousButton.addEventListener("click", () => {
+	previousButton?.addEventListener("click", () => {
 		currentSlide--;
 		if (currentSlide < 0) currentSlide = slides.length - 1;
 		updateCarousel();
 	});
+	if (slides?.length <= 1) {
+		nextButton.style.visibility = "hidden";
+		previousButton.style.visibility = "hidden";
+	}
+}
+
+function initProject(id) {
+	track = document.querySelector(".carousel_track");
+	let project = projects[id - 1];
+	console.log(project);
+	for (const src of project.imageUrls) {
+		let listItem = document.createElement("li");
+		let img = document.createElement("img");
+		img.src = src;
+		listItem.appendChild(img);
+		track?.appendChild(listItem);
+	}
+
+	const infoCont = document.querySelector(".information_panel_container");
+	const title = document.querySelector(".ip_title");
+	const desc = document.querySelector(".description");
+	const stack = document.querySelector(".stack");
+
+	title.textContent = project.title;
+	desc.textContent = project.description;
+	for (const tech of project.stack) {
+		const listItem = document.createElement("li");
+		listItem.textContent = tech;
+		stack?.appendChild(listItem);
+	}
+
+	return track?.children;
 }
 
 function clearProject() {
@@ -42,29 +62,4 @@ function clearProject() {
 	for (const child of element.children) {
 		element.removeChild(child);
 	}
-}
-
-async function loadProjects() {
-	const basePath = "../../assets/projects";
-
-	for (let id = 1; id <= 6; id++) {
-		const projectFolder = `p${id}`;
-		let response = await fetch(`${basePath}/${projectFolder}/project.json`);
-
-		if (!response.ok) {
-			response = await fetch(`${basePath}/placeholder/project.json`);
-		}
-		if (!response.ok) {
-			throw new Error("Failed to load placeholder project");
-		}
-
-		const data = await response.json();
-
-		const imageUrls = data.images.map(
-			(image) => `${basePath}/${response.ok ? projectFolder : "placeholder"}/${image}`,
-		);
-
-		projects.push(new Project(id, data.title, data.stack, data.description, imageUrls));
-	}
-    console.log(projects);
 }

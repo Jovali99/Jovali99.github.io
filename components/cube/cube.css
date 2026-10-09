@@ -22,8 +22,8 @@
 	position: absolute;
 	width: var(--cube-side-length);
 	height: var(--cube-side-length);
-	background: rgba(0, 128, 255, 0.05);
-	border: 1px solid #fff;
+	background: rgba(0, 0, 0, 1);
+	border: 1px solid black;
 	font-size: 24px;
 	line-height: 200px;
 	cursor: pointer;
@@ -35,17 +35,36 @@
 	height: 100%;
 	justify-content: center;
 	align-items: center;
-}
-
-.cube-img {
-	width: 100%;
-	height: 100%;
+    background-image: url(../../assets/night_sky_1.jpg);
+	background-size: cover;
+	background-position: center;
+	filter: brightness(1.5);
 }
 
 .cube_button {
 	cursor: pointer;
 	width: 85%;
 	height: 85%;
+
+	background-size: cover;
+	background-position: center;
+
+	border: 2px solid rgba(0, 0, 0, 1);
+	border-radius: 5px;
+
+	box-shadow:
+		inset 3px 3px 6px rgba(0, 0, 0, 0.8),
+		inset -2px -2px 4px rgba(255, 255, 255, 0.12),
+		0 0 0 2px rgba(0, 0, 0, 0.4);
+
+	filter: brightness(0.6);
+
+	overflow: hidden;
+}
+
+
+.cube_button:hover {
+	filter: brightness(0.8);
 }
 
 .front {
@@ -71,4 +90,3 @@
 .bottom {
 	transform: rotateX(-90deg) translateZ(var(--cube-z-offset));
 }
-

@@ -6,7 +6,7 @@
 .info_background_container {
   display: block;
   position: sticky;
-  top: 5%;
+  top: 10%;
   width: 800px;
   height: 800px;
   /*background-color: rgba(212, 180, 131, 0.1);*/

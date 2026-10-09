@@ -37,6 +37,7 @@ h2 {
 .space {
 	display: block;
 	position: relative;
+    isolation: isolate;
 	/*height: 200vh;*/
 	width: 100%;
 	background-color: black;
@@ -44,6 +45,15 @@ h2 {
 	background-size: 100% auto;
 	background-position: center top;
 	background-repeat: repeat-y;
+}
+
+.space::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.15);
+    pointer-events: none;
+    z-index: -1;
 }
 
 #information_panel {
@@ -57,8 +67,8 @@ h2 {
 }
 
 #cube_scene {
-	position: absolute;
-	top: 50vh;
+	/*position: absolute;
+	top: 100vh;*/
 	height: 40vh;
 	width: 100%;
 	/*background-color: rgba(100, 200, 100, 0.4);*/

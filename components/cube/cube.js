@@ -51,20 +51,26 @@ function animateCube() {
 	cube.style.transform = `rotateX(${totalRotateX}deg) rotateY(${totalRotateY}deg)`;
 }
 
-function cubeButtonClicked(project_id) {
-    const space = document.getElementById("space");
+function initCube() {
+	const buttons = document.querySelectorAll(".cube_button");
 
-    loadProjectPanel(project_id);
-	console.log("Cube button: ", project_id, " clicked");
+	buttons.forEach((button) => {
+		const projectId = Number(button.dataset.projectId);
+		const project = projects.find((p) => p.id === projectId);
+
+		if (!project || !project.imageUrls.length) return;
+
+		button.style.backgroundImage = `url("${project.imageUrls[0]}")`;
+	});
 }
 
 async function loadProjectPanel(id) {
 	const element = document.getElementById("project_panel");
-    if(element == null) return;
+	if (element == null) return;
 	const response = await fetch("components/project_panel/project_panel.html");
 	if (!response.ok) {
 		throw new Error(`Failed to load project: ${id}`);
 	}
 	element.innerHTML = await response.text();
-    initPP();
+	initPP(id);
 }
